@@ -1,0 +1,21 @@
+<mat-grid-list cols="2" rowHeight="220px">
+  <mat-grid-tile style="vertical-align: top">
+
+    <mat-card>
+      <mat-card-title>JWT Info</mat-card-title>
+      <mat-card-content *ngIf="tokenInfo">
+        <ul>
+          <li *ngFor="let t of tokenInfo">
+            <strong>{{t.key}}</strong>&nbsp;:&nbsp;{{t.value}}
+          </li>
+        </ul>
+      </mat-card-content>
+    </mat-card>
+
+  </mat-grid-tile>
+
+  <mat-grid-tile style="vertical-align: top">
+
+  </mat-grid-tile>
+</mat-grid-list>
+

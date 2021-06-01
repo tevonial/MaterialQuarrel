@@ -1,0 +1,47 @@
+<mat-toolbar>
+  <div style="z-index: 100">
+    <button mat-icon-button appBackButton>
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span>My Posts</span>
+  </div>
+
+  <div style="position:absolute; left: 0; width: 100%">
+    <div class="container" style="font-size: 16px; display: flex; flex-direction: row;">
+      <mat-form-field style="flex-grow: 1; margin-right: 30px">
+        <mat-label>Search</mat-label>
+        <input matInput type="text" [(ngModel)]="queryOptions.search" (change)="refreshPosts()">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Sort By</mat-label>
+        <mat-select [(ngModel)]="queryOptions.sort" (selectionChange)="refreshPosts()">
+          <mat-option value="date">Date</mat-option>
+          <mat-option value="thread">Thread</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</mat-toolbar>
+
+<div class="container" *ngIf="posts">
+  <mat-card class="post" *ngFor="let post of posts">
+    <mat-card-header>
+      <mat-card-title>{{post.thread.title}}</mat-card-title>
+      <mat-card-subtitle>
+
+        {{post.author.fullName}} - {{post.date | date: 'MM/dd/YY'}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      {{post.body}}
+    </mat-card-content>
+  </mat-card>
+
+  <mat-paginator [length]="totalPosts"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="pageSizeOptions"
+                 (page)="onPageChange($event)">
+  </mat-paginator>
+</div>
+
+<mat-spinner *ngIf="!posts" style="margin: 0 auto;"></mat-spinner>

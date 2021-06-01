@@ -1,0 +1,29 @@
+<mat-toolbar>
+  <div style="z-index: 100; width: 100%;">
+    <button mat-icon-button appBackButton>
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span>Threads</span>
+  </div>
+  <ng-container *ngIf="authService.isLoggedIn() | async">
+    <button mat-flat-button color="primary" [routerLink]="['/thread', 'compose']" skipLocationChange="true">New Thread</button>
+  </ng-container>
+
+</mat-toolbar>
+
+<!-- Loading spinner -->
+<mat-spinner *ngIf="!threads" style="margin: 0 auto;"></mat-spinner>
+
+<mat-list *ngIf="threads">
+  <mat-list-item [routerLink]="['/thread',thread._id]" *ngFor="let thread of threads">
+    <mat-icon mat-list-icon>topic</mat-icon>
+    <div mat-line><strong>{{thread.title}}</strong></div>
+    <div mat-line>
+      <span>{{thread.created | date: 'MM/dd/YY'}}</span>
+      <span class="float-right">{{thread._id}}</span>
+    </div>
+  </mat-list-item>
+</mat-list>
+
+<!-- For Compose Dialog -->
+<router-outlet></router-outlet>

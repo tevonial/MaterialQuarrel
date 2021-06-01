@@ -1,0 +1,84 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Account Information</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput type="text" [(ngModel)]="accountUpdate.username">
+    </mat-form-field>
+    &nbsp;
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput type="text" [(ngModel)]="accountUpdate.email">
+    </mat-form-field>
+    &nbsp;
+    <mat-form-field>
+      <mat-label>Role</mat-label>
+      <mat-select [(ngModel)]="accountUpdate.role">
+        <mat-option value="reg">Regular</mat-option>
+        <mat-option value="mod">Moderator</mat-option>
+        <mat-option value="admin">Administrator</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-action-row>
+      <button mat-raised-button color="primary"
+              (click)="saveAccountInfo()"
+              [class.button-spinner]="loading[0]"
+              [disabled]="loading[0]">&nbsp;<span>Save</span>&nbsp;</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Name</mat-panel-title>
+    </mat-expansion-panel-header>
+
+
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input matInput type="text" [(ngModel)]="nameUpdate.name.first">
+    </mat-form-field>
+    &nbsp;
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input matInput type="text" [(ngModel)]="nameUpdate.name.last">
+    </mat-form-field>
+
+    <mat-action-row>
+      <button mat-raised-button color="primary"
+              (click)="saveBasicInfo()"
+              [class.button-spinner]="loading[1]"
+              [disabled]="loading[1]">&nbsp;<span>Save</span>&nbsp;</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Profile Image</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div style="display: flex; flex-flow: row nowrap; ">
+      <div style="width: 20%; border: 1px solid #000000; margin-right: 48px">
+        <img [src]="'/api/user/' + (auth.getId() | async) + '/profile-image?' + reloadTimeStamp" style="width: 100%">
+      </div>
+
+      <mat-file-upload
+        [labelText]="'Select a file to upload:'"
+        [selectButtonText]="'Choose File'"
+        [selectFilesButtonType]="'button'"
+        [uploadButtonText]="'Upload'"
+        [uploadButtonType]="'submit'"
+        [allowMultipleFiles]="false"
+        [showUploadButton]="true"
+        [customSvgIcon]="'close_custom'"
+        [acceptedTypes]="'.png, .jpg, .jpeg'"
+        (uploadClicked)="onUploadProfileImageClicked($event)"
+        (selectedFilesChanged)="onSelectedFilesChanged($event)"
+      ></mat-file-upload>
+    </div>
+
+  </mat-expansion-panel>
+</mat-accordion>

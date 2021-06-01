@@ -1,0 +1,18 @@
+<mat-toolbar>
+  <button mat-icon-button appBackButton>
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span>My Account</span>
+</mat-toolbar>
+
+<nav mat-tab-nav-bar mat-align-tabs="center">
+  <div mat-tab-link *ngFor="let link of links"
+     [routerLink]="link.link"
+     [active]="activeLink == link"
+     (click)="activeLink = link">{{link.title}}
+  </div>
+</nav>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

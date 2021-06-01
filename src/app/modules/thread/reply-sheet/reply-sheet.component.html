@@ -1,0 +1,17 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Reply to {{data.replyToName}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field class="w-100">
+      <textarea class="edit-post-textarea" #messageInput matInput></textarea>
+    </mat-form-field>
+    <mat-card-footer>
+      <button class="float-right" (click)="send(messageInput.value)" mat-icon-button>
+        <mat-icon>send</mat-icon>
+      </button>
+    </mat-card-footer>
+  </mat-card-content>
+</mat-card>
+
+

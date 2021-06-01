@@ -1,0 +1,70 @@
+<div class="mat-typography mat-app-background"
+     [ngClass]="{'dark-theme': settings.getSetting('display-config', 'dark-theme') | async}"
+     style="height: 100%;">
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+    <span>{{settings.getForumName() | async}}</span>
+    <span class="toolbar-spacer"></span>
+
+    <ng-container *ngIf="auth.isLoggedIn() | async">
+      <button mat-button [matMenuTriggerFor]="menu">
+        {{auth.getGreeting() | async}}
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['account','overview']">Account</button>
+        <button mat-menu-item routerLink="settings">Settings</button>
+        <button mat-menu-item (click)="logout()">Log Out</button>
+      </mat-menu>
+    </ng-container>
+
+    <ng-container *ngIf="!(auth.isLoggedIn() | async)">
+      <button mat-button [matMenuTriggerFor]="loginMenu">
+        <mat-icon>login</mat-icon>
+      </button>
+
+      <mat-menu #loginMenu="matMenu" class="p-3">
+        <div (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
+          <form #form="ngForm" (ngSubmit)="attemptLogin()">
+            <mat-form-field class="w-100">
+              <mat-label>Username</mat-label>
+              <input matInput type="text" name="u" [(ngModel)]="credentials.username">
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Password</mat-label>
+              <input (click)="$event.stopPropagation()" matInput type="password" name="p" [(ngModel)]="credentials.password">
+            </mat-form-field>
+            <button mat-raised-button color="primary" class="w-100"
+                    [class.button-spinner]="loading"
+                    [disabled]="loading">&nbsp;<span>Log In</span>&nbsp;</button>
+          </form>
+        </div>
+      </mat-menu>
+    </ng-container>
+  </mat-toolbar>
+
+
+  <mat-sidenav-container class="h-100" style="flex-grow: 1">
+    <mat-sidenav class="main-sidenav" #sidenav mode="push">
+      <mat-nav-list (click)="sidenav.close()" class="nav-list">
+        <mat-list-item routerLink='thread'>
+          <mat-icon>forum</mat-icon>&nbsp;Threads
+        </mat-list-item>
+
+        <mat-list-item routerLink='posts'>
+          <mat-icon>comment</mat-icon>&nbsp;My Posts
+        </mat-list-item>
+
+        <mat-list-item routerLink='user'>
+          <mat-icon>account_circle</mat-icon>&nbsp;Users
+        </mat-list-item>
+
+        <mat-list-item routerLink='settings'>
+          <mat-icon>settings</mat-icon>&nbsp;Settings
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content class="main-sidenav-content">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

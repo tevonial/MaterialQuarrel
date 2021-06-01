@@ -1,0 +1,18 @@
+.close-button{
+  float: right;
+  top:-24px;
+  right:-24px;
+}
+
+//if you want some css animation
+.close-icon {
+  transition: .5s ease-in-out;
+}
+
+.close-icon:hover {
+  transform: rotate(90deg);
+}
+
+.edit-post {
+  width: 100%;
+}

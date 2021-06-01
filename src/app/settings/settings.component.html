@@ -1,0 +1,51 @@
+<mat-toolbar>
+  <div style="z-index: 100">
+    <button mat-icon-button appBackButton>
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span>Settings</span>
+  </div>
+</mat-toolbar>
+
+<div class="container">
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Forum</mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <mat-label>Forum Name</mat-label>
+        <input matInput type="text" [(ngModel)]="forumName">
+      </mat-form-field>
+
+      <mat-action-row>
+        <button mat-raised-button color="primary"
+                (click)="saveForumSettings()"
+                [class.button-spinner]="loading[0]"
+                [disabled]="loading[0]">&nbsp;<span>Save</span>&nbsp;</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Display</mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <mat-label>Theme</mat-label>
+        <mat-select [(ngModel)]="darkTheme">
+          <mat-option value="false">Light</mat-option>
+          <mat-option value="true">Dark</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-action-row>
+        <button mat-raised-button color="primary"
+                (click)="saveDisplaySettings()"
+                [class.button-spinner]="loading[1]"
+                [disabled]="loading[1]">&nbsp;<span>Save</span>&nbsp;</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

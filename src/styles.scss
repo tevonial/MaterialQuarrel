@@ -1,0 +1,32 @@
+@import './styles/material-theme';
+
+/* You can add global styles to this file, and also import other style files */
+
+/*html, body { height: 100%; }*/
+html { height: 100%; }
+body { height: calc(100vh - 64px) }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
+
+.container {
+  padding-top: 15px;
+}
+
+.post-bottom-sheet {
+  min-height: 70vh;
+  min-width: 80vw !important;
+  margin-top: 0;
+
+  /*// margin-left: 465px !important;*/
+  /*  position: absolute;*/
+  /*  bottom: 0px;*/
+  /*  right: 10px;*/
+  /*  width: calc(100vw - 485px) !important;*/
+  /*  min-width: 0% !important;*/
+}
+
+.edit-post-textarea {
+  min-height: calc(70vh - 160px);
+  resize: none;
+  padding-bottom: 1em;
+  font-size: 1.4em !important;
+}
