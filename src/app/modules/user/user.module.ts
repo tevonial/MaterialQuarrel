@@ -4,7 +4,7 @@ import { UserListComponent } from './user-list/user-list.component';
 import {MaterialImporter} from '../../material-importer';
 import {FormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
-import {DirectivesModule} from '../directives/directives.module';
+import {DirectivesModule} from '../shared/directives.module';
 
 const routes: Routes = [
   {path: '', component: UserListComponent}

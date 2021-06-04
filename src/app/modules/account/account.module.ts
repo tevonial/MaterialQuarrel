@@ -7,7 +7,7 @@ import {MaterialImporter} from '../../material-importer';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AccountComponent} from './account.component';
-import {DirectivesModule} from '../directives/directives.module';
+import {DirectivesModule} from '../shared/directives.module';
 
 const routes: Routes = [
   {path: '', component: AccountComponent, children: [
