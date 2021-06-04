@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AccountService, PageOptions, User, UserQuery} from '../../../services/account.service';
+import {AccountService, PageOptions, User, UserQuery, UsersResponse} from '../../../services/account.service';
 
 interface UserTile {
   name: string;
@@ -37,8 +37,10 @@ export class UserListComponent implements OnInit {
   }
 
   refreshUsers(): void {
-    this.accountService.getUsers(this.userQuery, this.pageOptions).subscribe((users) => {
-      this.users = users;
+    this.accountService.getUsers(this.userQuery, this.pageOptions).subscribe((response: UsersResponse) => {
+      this.totalUsers = response.totalUsers;
+      this.pageSize = response.pageSize;
+      this.users = response.users;
     });
   }
 

@@ -15,12 +15,19 @@ export interface User {
 
 export interface UserQuery {
   search: string;
-  searchBy: string;
+  searchBy: 'username' | 'name';
 }
 
 export interface PageOptions {
   index: number;
   pageSize: number;
+}
+
+export interface UsersResponse {
+  totalUsers: number;
+  index: number;
+  pageSize: number;
+  users: User[];
 }
 
 @Injectable({
@@ -50,11 +57,11 @@ export class AccountService {
     });
   }
 
-  getUsers(userQuery, pageOptions): Observable<User[]> {
+  getUsers(userQuery, pageOptions): Observable<UsersResponse> {
     const encodedUserQuery = encodeURIComponent(JSON.stringify(userQuery));
     const encodedPageOptions = encodeURIComponent((JSON.stringify(pageOptions)));
 
-    return this.http.get<User[]>(`${this.apiUrl}?userQuery=${encodedUserQuery}&pageOptions=${encodedPageOptions}`);
+    return this.http.get<UsersResponse>(`${this.apiUrl}?userQuery=${encodedUserQuery}&pageOptions=${encodedPageOptions}`);
   }
 
   uploadProfileImage(file: File): Observable<string | boolean> {
