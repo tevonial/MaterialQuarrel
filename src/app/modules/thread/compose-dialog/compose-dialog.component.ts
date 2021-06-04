@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ThreadService} from '../../../services/thread.service';
+import { Location } from '@angular/common';
 
 // Compose Dialog
 @Component({
@@ -25,7 +26,8 @@ export class ComposeDialogEntryComponent {
     public dialog: MatDialog,
     public router: Router,
     public activatedRoute: ActivatedRoute,
-    private thread: ThreadService
+    private thread: ThreadService,
+    private location: Location
   ) {
     this.openDialog();
   }
@@ -38,10 +40,12 @@ export class ComposeDialogEntryComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result && result.title && result.body) {
         this.thread.composeThread(result.title, result.body).subscribe(() => {
+          // After composing thread, navigate to thread-list
           this.router.navigate(['../'], { relativeTo: this.activatedRoute });
         });
       } else {
-        this.router.navigate(['../'], { relativeTo: this.activatedRoute });
+        // If compose cancelled, go back to previous route (which may be thread-list)
+        this.location.back();
       }
     });
   }

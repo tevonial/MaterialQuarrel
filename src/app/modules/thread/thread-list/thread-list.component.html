@@ -6,7 +6,7 @@
     <span>Threads</span>
   </div>
   <ng-container *ngIf="authService.isLoggedIn() | async">
-    <button mat-flat-button color="primary" [routerLink]="['/thread', 'compose']" skipLocationChange="true">New Thread</button>
+    <button mat-flat-button color="primary" [routerLink]="['/thread', 'compose']">New Thread</button>
   </ng-container>
 
 </mat-toolbar>
