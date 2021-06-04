@@ -7,7 +7,7 @@ import {ThreadComponent} from './thread/thread.component';
 import {FormsModule} from '@angular/forms';
 import {ComposeDialogComponent, ComposeDialogEntryComponent} from './compose-dialog/compose-dialog.component';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
-import {DirectivesModule} from '../directives/directives.module';
+import {DirectivesModule} from '../shared/directives.module';
 
 const routes: Routes = [
   {path: '', component: ThreadListComponent, children: [

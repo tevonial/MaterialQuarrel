@@ -15,7 +15,7 @@ import { PostsComponent } from './posts/posts.component';
 import { AccountComponent } from './modules/account/account.component';
 import {AuthInterceptor} from './auth-interceptor';
 import { EditSheetComponent } from './modules/thread/edit-sheet/edit-sheet.component';
-import {DirectivesModule} from './modules/directives/directives.module';
+import {DirectivesModule} from './modules/shared/directives.module';
 
 @NgModule({
   declarations: [
