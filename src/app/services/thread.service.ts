@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 export interface ThreadList {
   updated: Date;
@@ -108,6 +109,8 @@ export class ThreadService {
   }
 
   deletePost(postId: string): Observable<boolean> {
-    return this.httpClient.delete<boolean>(`${postApiurl}/${postId}`);
+    return this.httpClient.delete<{success: boolean}>(`${postApiurl}/${postId}`).pipe(
+      map(r => r.success)
+    );
   }
 }

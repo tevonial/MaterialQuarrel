@@ -22,7 +22,6 @@ export class ThreadComponent implements OnInit {
 
   replyBottomSheetRef: MatBottomSheetRef;
   editBottomSheetRef: MatBottomSheetRef;
-
   nestedTreeControl: NestedTreeControl<Post>;
   dataSource: MatTreeNestedDataSource<Post>;
 
@@ -134,7 +133,7 @@ export class ThreadComponent implements OnInit {
   }
 
   deletePost(node: Post): void {
-    this.threadService.deletePost(node._id).subscribe((result) => {
+    this.threadService.deletePost(node._id).subscribe(() => {
       this.refreshPostTree();
     });
   }
