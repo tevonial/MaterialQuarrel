@@ -17,10 +17,19 @@
 <mat-list *ngIf="threads">
   <mat-list-item [routerLink]="['/thread',thread._id]" *ngFor="let thread of threads">
     <mat-icon mat-list-icon>topic</mat-icon>
-    <div mat-line><strong>{{thread.title}}</strong></div>
-    <div mat-line>
-      <span>{{thread.created | date: 'MM/dd/YY'}}</span>
-      <span class="float-right">{{thread._id}}</span>
+    <div class="thread-list-item-container">
+      <div class="thread-list-item-details">
+        <div mat-line><strong>{{thread.title}}</strong></div>
+        <div mat-line>{{thread.created | date: 'MM/dd/YY'}} - {{thread.author.fullName}} ({{thread._id}})</div>
+      </div>
+      <div class="thread-list-item-menu">
+        <button *ngIf="thread.author._id == (authService.getId() | async)" mat-icon-button [matMenuTriggerFor]="optionsMenus" (click)="$event.stopPropagation()" class="float-right"><mat-icon>more_vert</mat-icon></button>
+        <mat-menu #optionsMenus="matMenu">
+          <button mat-menu-item (click)="deleteThread(thread)">
+            <mat-icon>delete</mat-icon>Delete
+          </button>
+        </mat-menu>
+      </div>
     </div>
   </mat-list-item>
 </mat-list>

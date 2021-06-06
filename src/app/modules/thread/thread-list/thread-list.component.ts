@@ -27,4 +27,12 @@ export class ThreadListComponent implements OnInit {
   ngOnInit(): void {
     this.refreshThreads();
   }
+
+  deleteThread(thread: Thread): void {
+    this.threadService.deleteThread(thread._id).subscribe((result) => {
+      if (result) {
+        this.refreshThreads();
+      }
+    });
+  }
 }

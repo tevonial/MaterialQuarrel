@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {User} from './account.service';
 
 export interface ThreadList {
   updated: Date;
@@ -10,7 +11,7 @@ export interface ThreadList {
 
 export interface Thread {
   _id: string;
-  author: string;
+  author: User;
   title: string;
   created: Date;
   updated: Date;
@@ -62,7 +63,7 @@ export interface PostsResponse {
 }
 
 const threadApiUrl = '/api/thread';
-const postApiurl = '/api/post';
+const postApiUrl = '/api/post';
 
 @Injectable({
   providedIn: 'root'
@@ -86,30 +87,36 @@ export class ThreadService {
   }
 
   getPostsByThread(id: string): Observable<Post[]> {
-    return this.httpClient.get<Post[]>(`${postApiurl}/thread/${id}`);
+    return this.httpClient.get<Post[]>(`${postApiUrl}/thread/${id}`);
   }
 
   getPostTree(threadId: string): Observable<Post[]> {
-    return this.httpClient.get<Post[]>(`${postApiurl}/thread/${threadId}/tree`);
+    return this.httpClient.get<Post[]>(`${postApiUrl}/thread/${threadId}/tree`);
   }
 
   getPostsByAuthor(authorId: string, postQueryOptions: PostQueryOptions, pageOptions: PageOptions): Observable<PostsResponse> {
     const encodedPostQuery = encodeURIComponent(JSON.stringify(postQueryOptions));
     const encodedPageOptions = encodeURIComponent(JSON.stringify(pageOptions));
 
-    return this.httpClient.get<PostsResponse>(`${postApiurl}/author/${authorId}?postQuery=${encodedPostQuery}&pageOptions=${encodedPageOptions}`);
+    return this.httpClient.get<PostsResponse>(`${postApiUrl}/author/${authorId}?postQuery=${encodedPostQuery}&pageOptions=${encodedPageOptions}`);
   }
 
   replyToPost(postId: string, message: string): Observable<Post> {
-    return this.httpClient.post<Post>(`${postApiurl}/${postId}/reply/`, {body: message});
+    return this.httpClient.post<Post>(`${postApiUrl}/${postId}/reply/`, {body: message});
   }
 
   editPost(postId: string, post: string): Observable<Post> {
-    return this.httpClient.put<Post>(`${postApiurl}/${postId}`, {body: post});
+    return this.httpClient.put<Post>(`${postApiUrl}/${postId}`, {body: post});
   }
 
   deletePost(postId: string): Observable<boolean> {
-    return this.httpClient.delete<{success: boolean}>(`${postApiurl}/${postId}`).pipe(
+    return this.httpClient.delete<{success: boolean}>(`${postApiUrl}/${postId}`).pipe(
+      map(r => r.success)
+    );
+  }
+
+  deleteThread(threadId: string): Observable<boolean> {
+    return this.httpClient.delete<{success: boolean}>(`${threadApiUrl}/${threadId}`).pipe(
       map(r => r.success)
     );
   }

@@ -1,0 +1,10 @@
+.thread-list-item-container {
+  margin-left: 1rem;
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+}
+
+.thread-list-item-details {
+  flex-grow: 1;
+}

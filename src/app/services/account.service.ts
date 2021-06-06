@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {AuthService, JWTPayload} from './auth.service';
 
 export interface User {
+  _id: string;
   username?: string;
   email?: string;
   role?: string;
@@ -11,6 +12,7 @@ export interface User {
     first: string;
     last: string;
   };
+  fullName?: string;
 }
 
 export interface UserQuery {
@@ -42,7 +44,7 @@ export class AccountService {
     private auth: AuthService
   ) {}
 
-  updateAccount(update: User): Observable<boolean> {
+  updateAccount(update: Partial<User>): Observable<boolean> {
     return new Observable<boolean>((subscriber) => {
       this.auth.getId().subscribe((id) => {
         this.http.put<{token: string}>(`${this.apiUrl}/${id}`, update).subscribe((response) => {
