@@ -39,7 +39,7 @@ export interface Post {
     fullName: string;
   };
   body: string;
-  topLevel: boolean;
+  threadRoot: boolean;
   parent?: string;
   children: [Post];
   image?: string;
