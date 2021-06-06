@@ -15,7 +15,7 @@
 <mat-spinner *ngIf="!threads" style="margin: 0 auto;"></mat-spinner>
 
 <mat-list *ngIf="threads">
-  <mat-list-item [routerLink]="['/thread',thread._id]" *ngFor="let thread of threads">
+  <mat-list-item matRipple [routerLink]="['/thread',thread._id]" *ngFor="let thread of threads">
     <mat-icon mat-list-icon>topic</mat-icon>
     <div class="thread-list-item-container">
       <div class="thread-list-item-details">

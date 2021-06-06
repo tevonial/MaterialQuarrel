@@ -18,6 +18,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatFileUploadModule} from 'mat-file-upload';
 import {MatTableModule} from '@angular/material/table';
+import {MatRippleModule} from '@angular/material/core';
 
 
 
@@ -42,7 +43,8 @@ import {MatTableModule} from '@angular/material/table';
     MatPaginatorModule,
     MatDialogModule,
     MatFileUploadModule,
-    MatTableModule
+    MatTableModule,
+    MatRippleModule
   ]
 })
 export class MaterialImporter {}
