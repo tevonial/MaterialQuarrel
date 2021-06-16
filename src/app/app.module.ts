@@ -16,6 +16,7 @@ import { AccountComponent } from './modules/account/account.component';
 import {AuthInterceptor} from './auth-interceptor';
 import { EditSheetComponent } from './modules/thread/edit-sheet/edit-sheet.component';
 import {DirectivesModule} from './modules/shared/directives.module';
+import {ConfirmDialogModule} from './modules/shared/confirm-dialog/confirm-dialog.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,6 @@ import {DirectivesModule} from './modules/shared/directives.module';
     SettingsComponent,
     ReplySheetComponent,
     PostsComponent,
-    AccountComponent,
     EditSheetComponent
   ],
   imports: [
@@ -35,7 +35,8 @@ import {DirectivesModule} from './modules/shared/directives.module';
     ReactiveFormsModule,
     AppRoutingModule,
     MatBottomSheetModule,
-    DirectivesModule
+    DirectivesModule,
+    ConfirmDialogModule.forRoot()
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]

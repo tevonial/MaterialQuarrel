@@ -25,6 +25,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
+    AccountComponent,
     AccountOverviewComponent,
     AccountSettingsComponent,
     AccountSecurityComponent
