@@ -9,6 +9,8 @@ import {AuthService} from '../../../services/auth.service';
 import {EditSheetComponent} from '../edit-sheet/edit-sheet.component';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {EditDialogComponent} from '../edit-dialog/edit-dialog.component';
+import {ConfirmDialogComponent} from '../../shared/confirm-dialog/confirm-dialog.component';
+import {ConfirmDialogService} from '../../shared/confirm-dialog/confirm-dialog.service';
 
 @Component({
   selector: 'app-thread',
@@ -30,7 +32,8 @@ export class ThreadComponent implements OnInit {
     private threadService: ThreadService,
     private bottomSheet: MatBottomSheet,
     private matDialog: MatDialog,
-    public auth: AuthService
+    public auth: AuthService,
+    private confirmDialog: ConfirmDialogService
   ) {
     this.nestedTreeControl = new NestedTreeControl<Post>(post => post.children);
     this.dataSource = new MatTreeNestedDataSource<Post>();
@@ -133,8 +136,21 @@ export class ThreadComponent implements OnInit {
   }
 
   deletePost(node: Post): void {
-    this.threadService.deletePost(node._id).subscribe(() => {
-      this.refreshPostTree();
+    const changes: string[] = new Array<string>();
+
+    changes.push(`Delete post (${node._id})`);
+    if (node.children) {
+      node.children.forEach((c) => {
+        changes.push(`Delete child post (${c._id})`);
+      });
+    }
+
+    this.confirmDialog.open('Confirm Delete', changes).subscribe((result) => {
+      if (result) {
+        this.threadService.deletePost(node._id).subscribe(() => {
+          this.refreshPostTree();
+        });
+      }
     });
   }
 }

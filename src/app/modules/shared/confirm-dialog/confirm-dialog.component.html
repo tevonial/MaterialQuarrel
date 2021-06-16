@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>{{data.confirmTitle}}</h1>
+<div mat-dialog-content>
+  The following changes will be made:
+  <ul>
+    <li *ngFor="let change of data.changes">
+      {{change}}
+    </li>
+  </ul>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="primary" mat-dialog-close="true">Confirm</button>
+  <button mat-button mat-dialog-close="false">Cancel</button>
+</div>
