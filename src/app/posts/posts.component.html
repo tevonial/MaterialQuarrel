@@ -1,11 +1,4 @@
-<mat-toolbar>
-  <div style="z-index: 100">
-    <button mat-icon-button appBackButton>
-      <mat-icon>arrow_back</mat-icon>
-    </button>
-    <span>My Posts</span>
-  </div>
-
+<app-title-bar title="My Posts">
   <div style="position:absolute; left: 0; width: 100%">
     <div class="container" style="font-size: 16px; display: flex; flex-direction: row;">
       <mat-form-field style="flex-grow: 1; margin-right: 30px">
@@ -22,7 +15,7 @@
       </mat-form-field>
     </div>
   </div>
-</mat-toolbar>
+</app-title-bar>
 
 <div class="container" *ngIf="posts">
   <mat-card class="post" *ngFor="let post of posts">

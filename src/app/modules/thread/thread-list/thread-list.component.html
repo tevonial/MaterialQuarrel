@@ -1,15 +1,8 @@
-<mat-toolbar>
-  <div style="z-index: 100; width: 100%;">
-    <button mat-icon-button appBackButton>
-      <mat-icon>arrow_back</mat-icon>
-    </button>
-    <span>Threads</span>
-  </div>
-  <ng-container *ngIf="authService.isLoggedIn() | async">
+<app-title-bar title="Threads">
+  <div style="width: 100%; display: flex; flex-flow: row-reverse" *ngIf="authService.isLoggedIn() | async">
     <button mat-flat-button color="primary" [routerLink]="['/thread', 'compose']">New Thread</button>
-  </ng-container>
-
-</mat-toolbar>
+  </div>
+</app-title-bar>
 
 <!-- Loading spinner -->
 <mat-spinner *ngIf="!threads" style="margin: 0 auto;"></mat-spinner>

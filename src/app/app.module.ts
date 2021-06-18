@@ -17,6 +17,7 @@ import {AuthInterceptor} from './auth-interceptor';
 import { EditSheetComponent } from './modules/thread/edit-sheet/edit-sheet.component';
 import {DirectivesModule} from './modules/shared/directives.module';
 import {ConfirmDialogModule} from './modules/shared/confirm-dialog/confirm-dialog.module';
+import {TitleBarModule} from './modules/shared/title-bar/title-bar.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {ConfirmDialogModule} from './modules/shared/confirm-dialog/confirm-dialo
     AppRoutingModule,
     MatBottomSheetModule,
     DirectivesModule,
-    ConfirmDialogModule.forRoot()
+    ConfirmDialogModule.forRoot(),
+    TitleBarModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]

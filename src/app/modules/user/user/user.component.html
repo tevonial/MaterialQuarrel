@@ -1,11 +1,4 @@
-<mat-toolbar>
-  <div style="z-index: 100">
-    <button mat-icon-button appBackButton>
-      <mat-icon>arrow_back</mat-icon>
-    </button>
-    <span>{{user.fullName}}</span>
-  </div>
-</mat-toolbar>
+<app-title-bar [title]="user.fullName"></app-title-bar>
 
 <div class="container">
   <mat-card>

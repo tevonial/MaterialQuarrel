@@ -8,6 +8,7 @@ import {FormsModule} from '@angular/forms';
 import {ComposeDialogComponent, ComposeDialogEntryComponent} from './compose-dialog/compose-dialog.component';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import {DirectivesModule} from '../shared/directives.module';
+import {TitleBarModule} from '../shared/title-bar/title-bar.module';
 
 const routes: Routes = [
   {path: '', component: ThreadListComponent, children: [
@@ -29,7 +30,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     FormsModule,
-    DirectivesModule
+    DirectivesModule,
+    TitleBarModule
   ]
 })
 export class ThreadModule {}
