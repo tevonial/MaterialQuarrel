@@ -76,8 +76,8 @@ export class AccountService {
 
     return new Observable<string | boolean>((subscriber) => {
       this.auth.getId().subscribe((userId) => {
-        this.http.put(`${this.apiUrl}/${userId}/profile-image`, formData, { headers }).subscribe((response) => {
-          subscriber.next(response as string);
+        this.http.put<string>(`${this.apiUrl}/${userId}/profile-image`, formData, { headers }).subscribe((response) => {
+          subscriber.next(response);
           subscriber.complete();
         }, () => {
           subscriber.next(false);
@@ -85,5 +85,13 @@ export class AccountService {
         });
       });
     });
+  }
+
+  getProfileImageUrl(userId: string): string {
+    return `${this.apiUrl}/${userId}/profile-image`;
+  }
+
+  getUser(userId: string): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/${userId}`);
   }
 }
