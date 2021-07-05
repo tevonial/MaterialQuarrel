@@ -4,7 +4,6 @@ import { UserListComponent } from './user-list/user-list.component';
 import {MaterialImporter} from '../../material-importer';
 import {FormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
-import {DirectivesModule} from '../shared/directives.module';
 import {UserComponent} from './user/user.component';
 import {TitleBarModule} from '../shared/title-bar/title-bar.module';
 
@@ -23,7 +22,6 @@ const routes: Routes = [
     MaterialImporter,
     FormsModule,
     RouterModule.forChild(routes),
-    DirectivesModule,
     TitleBarModule
   ]
 })

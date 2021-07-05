@@ -7,7 +7,6 @@ import {MaterialImporter} from '../../material-importer';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AccountComponent} from './account.component';
-import {DirectivesModule} from '../shared/directives.module';
 import {TitleBarModule} from '../shared/title-bar/title-bar.module';
 
 const routes: Routes = [
@@ -37,7 +36,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     FormsModule,
-    DirectivesModule,
     TitleBarModule
   ]
 })
