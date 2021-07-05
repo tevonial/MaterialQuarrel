@@ -8,6 +8,7 @@
 
     <ng-container *ngIf="auth.isLoggedIn() | async">
       <button mat-button [matMenuTriggerFor]="menu">
+        <img class="avatar" [src]="accountService.getProfileImageUrl(auth.getId() | async, true)" />
         {{auth.getGreeting() | async}}
       </button>
       <mat-menu #menu="matMenu">

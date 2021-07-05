@@ -3,7 +3,7 @@
 <div class="container">
   <mat-card>
     <mat-card-header>
-      <img mat-card-avatar [src]="accountService.getProfileImageUrl(authService.getId() | async)"  alt="User Thumbnail" />
+      <img mat-card-avatar [src]="accountService.getProfileImageUrl(user._id, true)"  alt="User Thumbnail" />
       <mat-card-title-group>
         <mat-card-title>{{user.fullName}}</mat-card-title>
         <mat-card-subtitle>{{user.role}}</mat-card-subtitle>

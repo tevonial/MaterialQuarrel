@@ -11,6 +11,7 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {EditDialogComponent} from '../edit-dialog/edit-dialog.component';
 import {ConfirmDialogComponent} from '../../shared/confirm-dialog/confirm-dialog.component';
 import {ConfirmDialogService} from '../../shared/confirm-dialog/confirm-dialog.service';
+import {AccountService} from '../../../services/account.service';
 
 @Component({
   selector: 'app-thread',
@@ -33,7 +34,8 @@ export class ThreadComponent implements OnInit {
     private bottomSheet: MatBottomSheet,
     private matDialog: MatDialog,
     public auth: AuthService,
-    private confirmDialog: ConfirmDialogService
+    private confirmDialog: ConfirmDialogService,
+    public accountService: AccountService
   ) {
     this.nestedTreeControl = new NestedTreeControl<Post>(post => post.children);
     this.dataSource = new MatTreeNestedDataSource<Post>();

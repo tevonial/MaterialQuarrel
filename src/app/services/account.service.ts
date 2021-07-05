@@ -87,8 +87,9 @@ export class AccountService {
     });
   }
 
-  getProfileImageUrl(userId: string): string {
-    return `${this.apiUrl}/${userId}/profile-image`;
+  getProfileImageUrl(userId: string, thumb: boolean = false): string {
+    const suffix = (thumb) ? '/thumb' : '';
+    return `${this.apiUrl}/${userId}/profile-image${suffix}`;
   }
 
   getUser(userId: string): Observable<User> {

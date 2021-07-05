@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from './services/auth.service';
 import {MatMenuTrigger} from '@angular/material/menu';
 import {SettingsService} from './services/settings.service';
+import {AccountService} from './services/account.service';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,7 @@ import {SettingsService} from './services/settings.service';
 export class AppComponent implements OnInit {
   constructor(
     public auth: AuthService,
+    public accountService: AccountService,
     public settings: SettingsService
   ) { }
 

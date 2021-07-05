@@ -22,6 +22,7 @@
             <mat-icon>reply</mat-icon>
           </button>
           <div>
+            <img class="avatar" [src]="accountService.getProfileImageUrl(node.author._id, true)"  alt="User Thumbnail" />
             {{node.author.fullName}}
             <span class="dim-text">at {{node.date | date: 'medium'}} - id: {{node._id}}</span>
           </div>
@@ -52,6 +53,7 @@
             <mat-icon>reply</mat-icon>
           </button>
           <div>
+            <img class="avatar" [src]="accountService.getProfileImageUrl(node.author._id, true)"  alt="User Thumbnail" />
             {{node.author.fullName}}
             <span class="dim-text">at {{node.date | date: 'medium'}} - id: {{node._id}}</span>
           </div>
