@@ -8,142 +8,77 @@
 
 </mat-toolbar>
 
-<!-- Old flat post layout -->
-
-<!--<div class="container"  *ngIf="posts">-->
-<!--  <mat-card class="post" *ngFor="let post of posts">-->
-<!--    <mat-card-header>-->
-<!--      <mat-card-title>{{post.title}}</mat-card-title>-->
-<!--      <mat-card-subtitle>-->
-<!--        <button mat-icon-button (click)="reply(post._id)"><mat-icon>quickreply</mat-icon></button>-->
-<!--        {{post.author.fullName}} - {{post.date | date: 'MM/dd/YY'}}</mat-card-subtitle>-->
-<!--    </mat-card-header>-->
-<!--    <mat-card-content>-->
-<!--      {{post.body}}-->
-<!--    </mat-card-content>-->
-<!--  </mat-card>-->
-<!--</div>-->
-
 <!-- Loading spinner -->
 <mat-spinner *ngIf="!posts" style="margin: 0 auto;"></mat-spinner>
 
-<!--<div class="container-fluid">-->
-<!--<div style="height: 100%">-->
-  <mat-tree [dataSource]="posts" [treeControl]="nestedTreeControl" class="post-tree">
+<mat-tree [dataSource]="posts" [treeControl]="nestedTreeControl" class="post-tree">
 
-    <!--  Classic Nodes -->
-    <!--    <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>-->
-    <!--      <li class="mat-tree-node">-->
-    <!--        <button mat-icon-button disabled></button>-->
-    <!--        <div class="post-node">-->
-    <!--          <div>-->
-    <!--            {{node.author.fullName}} at {{node.date | date: 'medium'}}-->
-    <!--            <button mat-icon-button (click)="replyTo(node)">-->
-    <!--              <mat-icon>reply</mat-icon>-->
-    <!--            </button>-->
-    <!--          </div>-->
-    <!--          <div>{{node.body}}</div>-->
-    <!--        </div>-->
-    <!--      </li>-->
-    <!--    </mat-tree-node>-->
-
-    <!--  <mat-nested-tree-node *matTreeNodeDef="let node; when: hasNestedChild" matTreeNodePadding>-->
-    <!--    <li>-->
-    <!--      <button mat-icon-button matTreeNodeToggle style="vertical-align: center">-->
-    <!--        <mat-icon class="mat-icon-rtl-mirror">-->
-    <!--          {{nestedTreeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}-->
-    <!--        </mat-icon>-->
-    <!--      </button>-->
-    <!--      <div class="post-node">-->
-    <!--        <div>-->
-    <!--          {{node.author.fullName}} <span class="date-time">at {{node.date | date: 'medium'}}</span>-->
-    <!--          <button mat-icon-button (click)="replyTo(node)">-->
-    <!--            <mat-icon>reply</mat-icon>-->
-    <!--          </button>-->
-    <!--        </div>-->
-    <!--        <div>{{node.body}}</div>-->
-    <!--      </div>-->
-    <!--      <ul [class.post-tree-invisible]="!nestedTreeControl.isExpanded(node)">-->
-    <!--        <ng-container matTreeNodeOutlet></ng-container>-->
-    <!--      </ul>-->
-    <!--    </li>-->
-    <!--  </mat-nested-tree-node>-->
-
-    <!--  All Flat Nodes -->
-    <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
-      <li class="mat-tree-node" style="">
-        <div class="post-container" style="width: 100%; z-index: 100">
-          <div class="post-row">
-            <button mat-icon-button (click)="replyTo(node)">
-              <mat-icon>reply</mat-icon>
+  <!--  All Flat Nodes -->
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+    <li class="mat-tree-node" style="">
+      <div class="post-container" style="width: 100%; z-index: 100">
+        <div class="post-row">
+          <button mat-icon-button (click)="replyTo(node)">
+            <mat-icon>reply</mat-icon>
+          </button>
+          <div>
+            {{node.author.fullName}}
+            <span class="dim-text">at {{node.date | date: 'medium'}} - id: {{node._id}}</span>
+          </div>
+          <button *ngIf="node.author._id == (auth.getId() | async)" mat-icon-button [matMenuTriggerFor]="optionsMenu" style="margin-left: auto"><mat-icon>more_vert</mat-icon></button>
+          <mat-menu #optionsMenu="matMenu">
+            <button mat-menu-item (click)="editPost(node)">
+              <mat-icon>edit</mat-icon>Edit
             </button>
-            <div>
-              {{node.author.fullName}}
-              <span class="dim-text">at {{node.date | date: 'medium'}} - id: {{node._id}}</span>
-            </div>
-            <button *ngIf="node.author._id == (auth.getId() | async)" mat-icon-button [matMenuTriggerFor]="optionsMenu" style="margin-left: auto"><mat-icon>more_vert</mat-icon></button>
-            <mat-menu #optionsMenu="matMenu">
-              <button mat-menu-item (click)="editPost(node)">
-                <mat-icon>edit</mat-icon>Edit
-              </button>
-              <button *ngIf="!node.threadRoot" mat-menu-item (click)="deletePost(node)">
-                <mat-icon>delete</mat-icon>Delete
-              </button>
-            </mat-menu>
-          </div>
-          <div class="post-row">
-            <button mat-icon-button disabled></button>
-<!--            <div>-->
-<!--              {{node.body}}-->
-<!--            </div>-->
-            <span class="post-body" [innerHTML]="node.body"></span>
-          </div>
+            <button *ngIf="!node.threadRoot" mat-menu-item (click)="deletePost(node)">
+              <mat-icon>delete</mat-icon>Delete
+            </button>
+          </mat-menu>
         </div>
-
-      </li>
-    </mat-tree-node>
-
-    <!--  Node with children (New, bordered flex boxes) -->
-    <mat-nested-tree-node *matTreeNodeDef="let node; when: hasNestedChild" matTreeNodePadding>
-      <li class="mat-nested-tree-node">
-        <div class="post-container">
-          <div class="post-row">
-            <button mat-icon-button (click)="replyTo(node)">
-              <mat-icon>reply</mat-icon>
-            </button>
-            <div>
-              {{node.author.fullName}}
-              <span class="dim-text">at {{node.date | date: 'medium'}} - id: {{node._id}}</span>
-            </div>
-            <button *ngIf="node.author._id == (auth.getId() | async)" mat-icon-button [matMenuTriggerFor]="optionsMenu" style="margin-left: auto"><mat-icon>more_vert</mat-icon></button>
-            <mat-menu #optionsMenu="matMenu">
-              <button mat-menu-item (click)="editPost(node)">
-                <mat-icon>edit</mat-icon>Edit
-              </button>
-              <button *ngIf="!node.threadRoot" mat-menu-item (click)="deletePost(node)">
-                <mat-icon>delete</mat-icon>Delete
-              </button>
-            </mat-menu>
-          </div>
-          <div class="post-row">
-            <button mat-icon-button matTreeNodeToggle style="align-self: flex-end">
-              <mat-icon class="mat-icon-rtl-mirror">
-                {{nestedTreeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-              </mat-icon>
-            </button>
-<!--            <div class="post-body">-->
-<!--              <div>{{node.body}}</div>-->
-<!--            </div>-->
-            <span class="post-body" [innerHTML]="node.body"></span>
-          </div>
+        <div class="post-row">
+          <button mat-icon-button disabled></button>
+          <span class="post-body" [innerHTML]="node.body"></span>
         </div>
+      </div>
+    </li>
+  </mat-tree-node>
 
-        <ul [class.post-tree-invisible]="!nestedTreeControl.isExpanded(node)">
-          <ng-container matTreeNodeOutlet></ng-container>
-        </ul>
-      </li>
-    </mat-nested-tree-node>
+  <!--  Node with children (New, bordered flex boxes) -->
+  <mat-nested-tree-node *matTreeNodeDef="let node; when: hasNestedChild" matTreeNodePadding>
+    <li class="mat-nested-tree-node">
+      <div class="post-container">
+        <div class="post-row">
+          <button mat-icon-button (click)="replyTo(node)">
+            <mat-icon>reply</mat-icon>
+          </button>
+          <div>
+            {{node.author.fullName}}
+            <span class="dim-text">at {{node.date | date: 'medium'}} - id: {{node._id}}</span>
+          </div>
+          <button *ngIf="node.author._id == (auth.getId() | async)" mat-icon-button [matMenuTriggerFor]="optionsMenu" style="margin-left: auto"><mat-icon>more_vert</mat-icon></button>
+          <mat-menu #optionsMenu="matMenu">
+            <button mat-menu-item (click)="editPost(node)">
+              <mat-icon>edit</mat-icon>Edit
+            </button>
+            <button *ngIf="!node.threadRoot" mat-menu-item (click)="deletePost(node)">
+              <mat-icon>delete</mat-icon>Delete
+            </button>
+          </mat-menu>
+        </div>
+        <div class="post-row">
+          <button mat-icon-button matTreeNodeToggle style="align-self: flex-end">
+            <mat-icon class="mat-icon-rtl-mirror">
+              {{nestedTreeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+          </button>
+          <span class="post-body" [innerHTML]="node.body"></span>
+        </div>
+      </div>
 
-  </mat-tree>
-<!--</div>-->
+      <ul [class.post-tree-invisible]="!nestedTreeControl.isExpanded(node)">
+        <ng-container matTreeNodeOutlet></ng-container>
+      </ul>
+    </li>
+  </mat-nested-tree-node>
 
+</mat-tree>
