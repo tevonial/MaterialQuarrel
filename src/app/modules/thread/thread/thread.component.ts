@@ -21,6 +21,7 @@ import {AccountService} from '../../../services/account.service';
 export class ThreadComponent implements OnInit {
 
   thread: Thread;
+  threadTitle = '';
   posts: Post[];
 
   replyBottomSheetRef: MatBottomSheetRef;
@@ -46,6 +47,7 @@ export class ThreadComponent implements OnInit {
       this.threadService.getThreadById(params.get('id')).subscribe((thread) => {
         // console.log(`Thread: ${JSON.stringify(thread)}`);
         this.thread = thread;
+        this.threadTitle = thread.title;
         this.refreshPostTree();
       });
     });

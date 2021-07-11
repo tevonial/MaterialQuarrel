@@ -1,12 +1,4 @@
-<mat-toolbar>
-  <div style="z-index: 100">
-    <button mat-icon-button appBackButton>
-      <mat-icon>arrow_back</mat-icon>
-    </button>
-    <span *ngIf="thread">{{thread.title}}</span>
-  </div>
-
-</mat-toolbar>
+<app-title-bar [title]="threadTitle"></app-title-bar>
 
 <!-- Loading spinner -->
 <mat-spinner *ngIf="!posts" style="margin: 0 auto;"></mat-spinner>
