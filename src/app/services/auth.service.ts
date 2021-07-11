@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {offsetSegment} from '@angular/compiler-cli/src/ngtsc/sourcemaps/src/segment_marker';
 
 export interface JWTPayload {
   _id: string;
@@ -16,7 +15,13 @@ export interface JWTPayload {
   exp: number;
 }
 
+export interface PasswordChangeObject {
+  currentPassword: string;
+  newPassword: string;
+}
+
 const loginUrl = `/api/auth/login`;
+const changePasswordUrl = (id) => `api/auth/${id}/password`;
 
 @Injectable({
   providedIn: 'root'
@@ -92,11 +97,20 @@ export class AuthService {
     this.loggedIn.next(false);
   }
 
+  changePassword(passwordChangeObject: PasswordChangeObject): Observable<boolean> {
+    return new Observable<boolean>((subscriber) => {
+      this.getId().subscribe((userId) => {
+        this.http.put<{success: boolean}>(changePasswordUrl(userId), passwordChangeObject).subscribe((response) => {
+          subscriber.next(response.success);
+          subscriber.complete();
+        });
+      });
+    });
+  }
+
   test(): void {
     this.http.get('/api/account/test').subscribe((res) => {
       console.log(JSON.stringify(res));
     });
   }
-
-
 }

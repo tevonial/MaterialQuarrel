@@ -8,19 +8,23 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AccountComponent} from './account.component';
 import {TitleBarModule} from '../shared/title-bar/title-bar.module';
+import {
+  ChangePasswordDialogComponent,
+  ChangePasswordDialogEntryComponent
+} from './account-security/change-password-dialog/change-password-dialog.component';
 
 const routes: Routes = [
+  /**
+   * Overview, Settings, and Security Tabs are children views of AccountComponent
+   */
   {path: '', component: AccountComponent, children: [
       {path: 'overview', component: AccountOverviewComponent},
       {path: 'settings', component: AccountSettingsComponent},
-      {path: 'security', component: AccountSecurityComponent},
+      {path: 'security', component: AccountSecurityComponent, children: [
+          {path: 'change-password', component: ChangePasswordDialogEntryComponent}
+        ]},
       {path: '', redirectTo: 'overview', pathMatch: 'full'}
     ]},
-
-  // {path: 'overview', component: AccountOverviewComponent},
-  // {path: 'settings', component: AccountSettingsComponent},
-  // {path: 'security', component: AccountSecurityComponent},
-  // {path: '', redirectTo: 'overview', pathMatch: 'full'}
 ];
 
 @NgModule({
@@ -28,7 +32,9 @@ const routes: Routes = [
     AccountComponent,
     AccountOverviewComponent,
     AccountSettingsComponent,
-    AccountSecurityComponent
+    AccountSecurityComponent,
+    ChangePasswordDialogEntryComponent,
+    ChangePasswordDialogComponent
   ],
   imports: [
     MaterialImporter,
