@@ -8,7 +8,11 @@ import {ActivatedRoute, Params} from '@angular/router';
   templateUrl: './user.component.html'
 })
 export class UserComponent implements OnInit {
-  user: User;
+  user: User = {
+    _id: '',
+    fullName: '',
+    role: ''
+  };
 
   constructor(
     public authService: AuthService,
