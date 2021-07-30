@@ -1,0 +1,8 @@
+<div class="toast toast-{{toast.type}}">
+<!--     [style.bottom.px]="i*100">-->
+  <div class="toast-heading">{{toast.subject}}</div>
+  <div class="toast-body" [innerHTML]="toast.body"></div>
+  <button mat-icon-button class="close-button" (click)="onCloseButton()">
+    <mat-icon class="close-icon">close</mat-icon>
+  </button>
+</div>

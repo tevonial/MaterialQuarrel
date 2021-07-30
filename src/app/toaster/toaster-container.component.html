@@ -1,0 +1,7 @@
+<div class="toaster-container">
+  <app-toaster class="toaster" *ngFor="let toast of toasts; let i=index"
+               [toast]="toast"
+               [i]="i"
+               (closeButton)="remove(toast.id)">
+  </app-toaster>
+</div>
