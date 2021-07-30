@@ -79,7 +79,8 @@ export class AccountService {
         this.http.put<string>(`${this.apiUrl}/${userId}/profile-image`, formData, { headers }).subscribe((response) => {
           subscriber.next(response);
           subscriber.complete();
-        }, () => {
+        }, (error) => {
+          console.log('Error: ' + JSON.stringify(error));
           subscriber.next(false);
           subscriber.complete();
         });
