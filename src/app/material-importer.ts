@@ -19,6 +19,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatFileUploadModule} from 'mat-file-upload';
 import {MatTableModule} from '@angular/material/table';
 import {MatRippleModule} from '@angular/material/core';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 
@@ -44,7 +46,9 @@ import {MatRippleModule} from '@angular/material/core';
     MatDialogModule,
     MatFileUploadModule,
     MatTableModule,
-    MatRippleModule
+    MatRippleModule,
+    MatSliderModule,
+    MatSlideToggleModule
   ]
 })
 export class MaterialImporter {}

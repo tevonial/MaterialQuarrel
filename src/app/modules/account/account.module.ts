@@ -12,6 +12,9 @@ import {
   ChangePasswordDialogComponent,
   ChangePasswordDialogEntryComponent
 } from './account-security/change-password-dialog/change-password-dialog.component';
+import {ImageCropperModule} from 'ngx-image-cropper';
+import {ImageUploadComponent} from './account-settings/profile-image-upload/image-upload.component';
+import {MatSliderModule} from '@angular/material/slider';
 
 const routes: Routes = [
   /**
@@ -34,7 +37,8 @@ const routes: Routes = [
     AccountSettingsComponent,
     AccountSecurityComponent,
     ChangePasswordDialogEntryComponent,
-    ChangePasswordDialogComponent
+    ChangePasswordDialogComponent,
+    ImageUploadComponent
   ],
   imports: [
     MaterialImporter,
@@ -42,7 +46,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     FormsModule,
-    TitleBarModule
+    TitleBarModule,
+    ImageCropperModule
   ]
 })
 export class AccountModule {}
