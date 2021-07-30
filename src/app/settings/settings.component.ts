@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {SettingsService} from '../services/settings.service';
+import {ToasterService} from '../services/toaster.service';
 
 @Component({
   selector: 'app-settings',
@@ -13,7 +14,8 @@ export class SettingsComponent implements OnInit {
   darkTheme = false;
 
   constructor(
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
+    public toasterService: ToasterService
   ) { }
 
   ngOnInit(): void {

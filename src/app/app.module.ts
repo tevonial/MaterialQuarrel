@@ -15,6 +15,8 @@ import {AuthInterceptor} from './auth-interceptor';
 import { EditSheetComponent } from './modules/thread/edit-sheet/edit-sheet.component';
 import {ConfirmDialogModule} from './modules/shared/confirm-dialog/confirm-dialog.module';
 import {TitleBarModule} from './modules/shared/title-bar/title-bar.module';
+import {ToasterContainerComponent} from './toaster/toaster-container.component';
+import {ToasterComponent} from './toaster/toaster.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import {TitleBarModule} from './modules/shared/title-bar/title-bar.module';
     SettingsComponent,
     ReplySheetComponent,
     PostsComponent,
-    EditSheetComponent
+    EditSheetComponent,
+    ToasterContainerComponent,
+    ToasterComponent
   ],
   imports: [
     BrowserModule,

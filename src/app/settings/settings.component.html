@@ -40,5 +40,37 @@
                 [disabled]="loading[1]">&nbsp;<span>Save</span>&nbsp;</button>
       </mat-action-row>
     </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Toasts</mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <mat-label>Subject</mat-label>
+        <input matInput type="text" placeholder="Subject" value="subject" #toastSubject>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Body</mat-label>
+        <input matInput type="text" placeholder="Body" value="body" #toastBody>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>TTL</mat-label>
+        <input matInput type="number" placeholder="TTL" value="5000" #toastTTL>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Type</mat-label>
+        <mat-select #toastType value="success">
+          <mat-option value="success">Success</mat-option>
+          <mat-option value="error">Error</mat-option>
+          <mat-option value="info">Info</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-flat-button (click)="toasterService.create(toastType.value, toastSubject.value, toastBody.value, toastTTL.value)">Create Toast</button>
+    </mat-expansion-panel>
   </mat-accordion>
 </div>
